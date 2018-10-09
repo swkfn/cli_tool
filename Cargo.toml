@@ -1,6 +1,9 @@
 [package]
 name = "cli_tool"
 version = "0.1.0"
-authors = ["HOME\\swkfn <sw.kfn4410uec@gmail.com>"]
+authors = ["swkfn <sw.kfn4410uec@gmail.com>"]
+description = "???"
 
 [dependencies]
+clap = "2.31"
+failure = "0.1"
