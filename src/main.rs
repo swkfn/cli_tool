@@ -22,7 +22,32 @@ fn parse_command(){
     }
 }
 
+fn getint() -> i32{
+    let mut line = String::new();
+    std::io::stdin().read_line(&mut line).ok();
+    let vec: Vec<&str> = line.split_whitespace().collect();
+    vec[0].parse().unwrap_or(0)
+}
+
+fn fib(n :i32) -> i32{
+    if n == 0{
+        0
+    }else{
+        let mut f1 = 0;
+        let mut f2 = 1;
+        let mut t = 0;
+        for _ in 0..n-2{
+            t = f1 + f2;
+            f1 = f2;
+            f2 = t;
+        }
+        f2
+    }
+}
+
 fn main(){
-    parse_command();
+    // parse_command();
+    let n = getint();
+    println!("{}", fib(n));
     println!("Hello, world!");
 }
