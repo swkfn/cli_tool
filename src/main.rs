@@ -8,9 +8,25 @@ use std::env;
 use std::fs::File;
 use clap::{Arg};
 
+struct User{
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+
+fn set_user(email: String, username: String) -> User{
+    User{
+        username,
+        email,
+        active: true,
+        sign_in_count: 1,
+    }
+}
+
 fn parse_command(){
     let app = app_from_crate!()
-    .arg(Arg::from_usage("<TEXT> 'ファイルを指定してください.'"));
+            .arg(Arg::from_usage("<TEXT> 'ファイルを指定してください.'"));
     let matches = app.get_matches();
 
     if let Some(filename) = matches.value_of("TEXT") {
@@ -47,7 +63,8 @@ fn fib(n :i32) -> i32{
 
 fn main(){
     // parse_command();
-    let n = getint();
-    println!("{}", fib(n));
-    println!("Hello, world!");
+    // let n = getint();
+    // println!("{}", fib(n));
+    let user1 = set_user(String::from("swkfn@example.com"), String::from("swkfn"));
+    println!("{}, {}, {}, {}", user1.username, user1.email, user1.active, user1.sign_in_count);
 }
