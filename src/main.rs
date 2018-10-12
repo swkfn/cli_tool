@@ -15,12 +15,19 @@ struct User{
     sign_in_count: u64,
 }
 
+// {:?} -> Debug出力, 構造体で使う場合は#[derive~]を宣言
+#[derive(Debug)]
+struct Rectangle{
+    width: u32,
+    height: u32,
+}
+
 fn set_user(email: String, username: String) -> User{
     User{
         username,
         email,
         active: true,
-        sign_in_count: 1,
+        sign_in_count: 2,
     }
 }
 
@@ -45,26 +52,12 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
-fn fib(n :i32) -> i32{
-    if n == 0{
-        0
-    }else{
-        let mut f1 = 0;
-        let mut f2 = 1;
-        let mut t = 0;
-        for _ in 0..n-2{
-            t = f1 + f2;
-            f1 = f2;
-            f2 = t;
-        }
-        f2
-    }
-}
-
 fn main(){
     // parse_command();
     // let n = getint();
-    // println!("{}", fib(n));
     let user1 = set_user(String::from("swkfn@example.com"), String::from("swkfn"));
-    println!("{}, {}, {}, {}", user1.username, user1.email, user1.active, user1.sign_in_count);
+    // ..user1で同じ設定をコピーできる
+
+    let rec1 = Rectangle{width: 30, height: 50};
+    println!("rec1 is {:?}", rec1);
 }
