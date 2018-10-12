@@ -22,6 +22,28 @@ struct Rectangle{
     height: u32,
 }
 
+// classのメソッドとメンバーは別々的な感じ?
+impl Rectangle{
+    fn area(&self) -> u32{
+        self.width * self.height
+    }
+    fn is_hold(&self, other: &Rectangle) -> bool{
+        self.width > other.width && self.height > other.height
+    }
+}
+
+#[derive(Debug)]
+enum IpAddrKind{
+    V4,
+    V6,
+}
+
+#[derive(Debug)]
+struct IpAddr {
+    kind: IpAddrKind,
+    address: String,
+}
+
 fn set_user(email: String, username: String) -> User{
     User{
         username,
@@ -55,9 +77,20 @@ fn getint() -> i32{
 fn main(){
     // parse_command();
     // let n = getint();
-    let user1 = set_user(String::from("swkfn@example.com"), String::from("swkfn"));
+    //let user1 = set_user(String::from("swkfn@example.com"), String::from("swkfn"));
     // ..user1で同じ設定をコピーできる
 
-    let rec1 = Rectangle{width: 30, height: 50};
-    println!("rec1 is {:?}", rec1);
+    // let rect1 = Rectangle { width: 30, height: 50 };
+    let home = IpAddr {
+        kind: IpAddrKind::V4,
+        address: String::from("127.0.0.1"),
+    };
+    println!("{:?}", home.address);
+
+    let loopback = IpAddr {
+        kind: IpAddrKind::V6,
+        address: String::from("::1"),
+    };
+
+    println!("rec1 is {}", rect1.area());
 }
