@@ -1,4 +1,4 @@
-#![allow(dead_code)]
+extern crate cli_tool;
 #[macro_use]
 extern crate failure;
 #[macro_use]
@@ -72,13 +72,5 @@ fn main(){
     //let rect1 = Rectangle { width: 30, height: 50 };
     //println!("rec1 is {}", rect1.area());
 
-    let some_u8_value = Some(3);
-    println!("{:?}", some_u8_value);
-    match some_u8_value {
-        Some(3) => println!("three"),
-        _ => (),
-    }
-    if let Some(3) = some_u8_value {
-        println!("three");
-    }
+    cli_tool::client::connect();
 }
