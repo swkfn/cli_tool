@@ -63,13 +63,6 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
-fn plus(x: Option<i32>) -> Option<i32>{
-    match x{
-        None => None,
-        Some(i) => Some(i + 1),
-    }
-}
-
 fn main(){
     // parse_command();
     // let n = getint();
@@ -79,8 +72,13 @@ fn main(){
     //let rect1 = Rectangle { width: 30, height: 50 };
     //println!("rec1 is {}", rect1.area());
 
-    let five = Some(5);
-    let six = plus(five);
-    let none = plus(None);
-    println!("{:?}, {:?}", six, none);
+    let some_u8_value = Some(3);
+    println!("{:?}", some_u8_value);
+    match some_u8_value {
+        Some(3) => println!("three"),
+        _ => (),
+    }
+    if let Some(3) = some_u8_value {
+        println!("three");
+    }
 }
