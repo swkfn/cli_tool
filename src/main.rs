@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 #[macro_use]
 extern crate failure;
 #[macro_use]
@@ -32,18 +33,6 @@ impl Rectangle{
     }
 }
 
-#[derive(Debug)]
-enum IpAddrKind{
-    V4,
-    V6,
-}
-
-#[derive(Debug)]
-struct IpAddr {
-    kind: IpAddrKind,
-    address: String,
-}
-
 fn set_user(email: String, username: String) -> User{
     User{
         username,
@@ -74,23 +63,24 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
+fn plus(x: Option<i32>) -> Option<i32>{
+    match x{
+        None => None,
+        Some(i) => Some(i + 1),
+    }
+}
+
 fn main(){
     // parse_command();
     // let n = getint();
     //let user1 = set_user(String::from("swkfn@example.com"), String::from("swkfn"));
     // ..user1で同じ設定をコピーできる
 
-    // let rect1 = Rectangle { width: 30, height: 50 };
-    let home = IpAddr {
-        kind: IpAddrKind::V4,
-        address: String::from("127.0.0.1"),
-    };
-    println!("{:?}", home.address);
+    //let rect1 = Rectangle { width: 30, height: 50 };
+    //println!("rec1 is {}", rect1.area());
 
-    let loopback = IpAddr {
-        kind: IpAddrKind::V6,
-        address: String::from("::1"),
-    };
-
-    println!("rec1 is {}", rect1.area());
+    let five = Some(5);
+    let six = plus(five);
+    let none = plus(None);
+    println!("{:?}, {:?}", six, none);
 }
