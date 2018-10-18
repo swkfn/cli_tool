@@ -29,20 +29,18 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
+// 関数内で文字列に変更がないい場合はスライスで指定する
+fn append_world(str1: &str) -> &str {
+  let mut result = String::with_capacity(str1.len() + 6);
+  result.push_str(str1);
+  result.push_str(" World");
+  return result;
+}
 
 fn main(){
     // parse_command();
     // let n = getint();
-    let mut v = Vec::new();
-    v.push(5);
-    v.push(6);
-    v.push(7);
-    v.push(8);
-    for i in &mut v{
-        *i += 50;
-    }
-    for i in &v{
-        println!("{}", i);
-    }
+    
+    println!("{}", append_world("Hello"));
     cli_tool::client::connect();
 }
