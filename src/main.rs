@@ -1,4 +1,4 @@
-extern crate cli_tool;
+extern crate cli_tool; // 外部クレートはsrcに構成する
 extern crate failure;
 #[macro_use]
 extern crate clap;
@@ -29,19 +29,20 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
-pub mod a {
-    pub mod series {
-        pub mod of {
-            pub fn nested_modules() {println!("aaa");}
-        }
-    }
-}
-
-use a::series::of;
 
 fn main(){
     // parse_command();
     // let n = getint();
-    of::nested_modules();
+    let mut v = Vec::new();
+    v.push(5);
+    v.push(6);
+    v.push(7);
+    v.push(8);
+    for i in &mut v{
+        *i += 50;
+    }
+    for i in &v{
+        println!("{}", i);
+    }
     cli_tool::client::connect();
 }
