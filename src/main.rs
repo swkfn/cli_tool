@@ -1,46 +1,12 @@
 extern crate cli_tool;
-#[macro_use]
 extern crate failure;
 #[macro_use]
 extern crate clap;
 
 use std::io::prelude::*;
-use std::env;
+// use std::env;
 use std::fs::File;
 use clap::{Arg};
-
-struct User{
-    username: String,
-    email: String,
-    active: bool,
-    sign_in_count: u64,
-}
-
-// {:?} -> Debug出力, 構造体で使う場合は#[derive~]を宣言
-#[derive(Debug)]
-struct Rectangle{
-    width: u32,
-    height: u32,
-}
-
-// classのメソッドとメンバーは別々的な感じ?
-impl Rectangle{
-    fn area(&self) -> u32{
-        self.width * self.height
-    }
-    fn is_hold(&self, other: &Rectangle) -> bool{
-        self.width > other.width && self.height > other.height
-    }
-}
-
-fn set_user(email: String, username: String) -> User{
-    User{
-        username,
-        email,
-        active: true,
-        sign_in_count: 2,
-    }
-}
 
 fn parse_command(){
     let app = app_from_crate!()
@@ -63,14 +29,19 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
+pub mod a {
+    pub mod series {
+        pub mod of {
+            pub fn nested_modules() {println!("aaa");}
+        }
+    }
+}
+
+use a::series::of;
+
 fn main(){
     // parse_command();
     // let n = getint();
-    //let user1 = set_user(String::from("swkfn@example.com"), String::from("swkfn"));
-    // ..user1で同じ設定をコピーできる
-
-    //let rect1 = Rectangle { width: 30, height: 50 };
-    //println!("rec1 is {}", rect1.area());
-
+    of::nested_modules();
     cli_tool::client::connect();
 }
