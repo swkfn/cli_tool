@@ -4,6 +4,7 @@ extern crate failure;
 extern crate clap;
 
 use std::io::prelude::*;
+use std::collections::HashMap;
 // use std::env;
 use std::fs::File;
 use clap::{Arg};
@@ -29,18 +30,19 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
-// 関数内で文字列に変更がないい場合はスライスで指定する
-fn append_world(str1: &str) -> &str {
-  let mut result = String::with_capacity(str1.len() + 6);
-  result.push_str(str1);
-  result.push_str(" World");
-  return result;
-}
-
 fn main(){
     // parse_command();
     // let n = getint();
-    
-    println!("{}", append_world("Hello"));
+
+    let teams  = vec![String::from("Blue"), String::from("Yellow")];
+    let initial_scores = vec![10, 50];
+    let score: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
+    for (k, v) in &score {
+        println!("{} was born in {}", k, v);
+    }
+    let team_name = String::from("Blue");
+    // 自分でDisplayメソッドを作るしかない
+    // https://doc.rust-lang.org/rust-by-example/hello/print/print_display.html
+    // println!("{}", &sc); 
     cli_tool::client::connect();
 }
