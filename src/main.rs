@@ -32,17 +32,31 @@ fn getint() -> i32{
 
 fn main(){
     // parse_command();
-    // let n = getint();
-
-    let teams  = vec![String::from("Blue"), String::from("Yellow")];
-    let initial_scores = vec![10, 50];
-    let score: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
-    for (k, v) in &score {
-        println!("{} was born in {}", k, v);
+    let n = getint();
+    let mut v = Vec::new();
+    let mut sum = 0;
+    let mut map = HashMap::new();
+    for i in 0..n{
+        let a = getint();
+        sum += a;
+        let cnt = map.entry(a).or_insert(0);
+        *cnt += 1;
+        v.push(a);
     }
-    let team_name = String::from("Blue");
-    // 自分でDisplayメソッドを作るしかない
-    // https://doc.rust-lang.org/rust-by-example/hello/print/print_display.html
-    // println!("{}", &sc); 
+    v.sort();
+    println!("sorted!");
+    for i in &mut v{
+        println!("{}", i);
+    }
+    println!("mean :{}", sum / (v.len() as i32));
+    let mut max = -1;
+    let mut idx = 0;
+    for (key, val) in &mut map{
+        if max < *val{
+            max = *val;
+            idx = *key;
+        }
+    }
+    println!("mode :{}, count :{}", idx, max);
     cli_tool::client::connect();
 }
