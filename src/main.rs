@@ -30,33 +30,36 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
+struct Data{
+    dep: Vec<String>,
+    name: Vec<String>,
+}
+
 fn main(){
     // parse_command();
-    let n = getint();
-    let mut v = Vec::new();
-    let mut sum = 0;
-    let mut map = HashMap::new();
-    for i in 0..n{
-        let a = getint();
-        sum += a;
-        let cnt = map.entry(a).or_insert(0);
-        *cnt += 1;
-        v.push(a);
+    // let n = getint();
+    type Map = HashMap<String, Vec<String>>;
+    let mut map = Map::new();
+    let depart = vec!["Engineering".to_string(), "Sales".to_string(), "HRD".to_string()];
+    
+    let mut data = Data{
+        dep: vec!["Engineering".to_string(), "Sales".to_string(), "HRD".to_string()],
+        name: vec!["Alice".to_string(), "Bob".to_string(), "Mike".to_string(), "Ant".to_string()],
+    };
+    for k in &depart{
+        map.insert(k.to_string(), Vec::new());
     }
-    v.sort();
-    println!("sorted!");
-    for i in &mut v{
-        println!("{}", i);
-    }
-    println!("mean :{}", sum / (v.len() as i32));
-    let mut max = -1;
-    let mut idx = 0;
-    for (key, val) in &mut map{
-        if max < *val{
-            max = *val;
-            idx = *key;
+    for d in data.dep.iter(){
+        for v in data.name.iter(){
+            map.get_mut(&d.to_string()).unwrap().push(v.to_string());
         }
     }
-    println!("mode :{}, count :{}", idx, max);
+    for (k, v) in &mut map{
+        println!("type: {}", k);
+        v.sort();
+        for per in v{
+            println!("{}", per);
+        }
+    }
     cli_tool::client::connect();
 }
