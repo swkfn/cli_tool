@@ -30,36 +30,29 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
-struct Data{
-    dep: Vec<String>,
-    name: Vec<String>,
+struct Guess{
+    val: i32,
+}
+
+impl Guess{
+    fn new(val: i32) -> Guess{
+        if val < 1 || val > 100 {
+            panic!("Guess value must be between 1 and 100, got {}.", val);
+        }
+        Guess{
+            val
+        }
+    }
+    fn val(&self) -> i32{
+        self.val
+    }
 }
 
 fn main(){
     // parse_command();
-    // let n = getint();
-    type Map = HashMap<String, Vec<String>>;
-    let mut map = Map::new();
-    let depart = vec!["Engineering".to_string(), "Sales".to_string(), "HRD".to_string()];
-    
-    let mut data = Data{
-        dep: vec!["Engineering".to_string(), "Sales".to_string(), "HRD".to_string()],
-        name: vec!["Alice".to_string(), "Bob".to_string(), "Mike".to_string(), "Ant".to_string()],
-    };
-    for k in &depart{
-        map.insert(k.to_string(), Vec::new());
-    }
-    for d in data.dep.iter(){
-        for v in data.name.iter(){
-            map.get_mut(&d.to_string()).unwrap().push(v.to_string());
-        }
-    }
-    for (k, v) in &mut map{
-        println!("type: {}", k);
-        v.sort();
-        for per in v{
-            println!("{}", per);
-        }
-    }
+    let n = getint();
+    let t = Guess::new(n);
+    println!("{}", t.val);
+    // ?演算子はResult型を返り値にする関数にしか使えない
     cli_tool::client::connect();
 }
