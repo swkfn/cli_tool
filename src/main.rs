@@ -30,29 +30,21 @@ fn getint() -> i32{
     vec[0].parse().unwrap_or(0)
 }
 
-struct Guess{
-    val: i32,
-}
+fn Max_num(list: &[i32]) -> i32{
+    let mut res = list[0];
 
-impl Guess{
-    fn new(val: i32) -> Guess{
-        if val < 1 || val > 100 {
-            panic!("Guess value must be between 1 and 100, got {}.", val);
-        }
-        Guess{
-            val
+    for &item in list.iter(){
+        if(res < item){
+            res = item;
         }
     }
-    fn val(&self) -> i32{
-        self.val
-    }
+    return res;
 }
 
 fn main(){
     // parse_command();
     let n = getint();
-    let t = Guess::new(n);
-    println!("{}", t.val);
-    // ?演算子はResult型を返り値にする関数にしか使えない
+    let num_list = vec![34, 50, 25, 100, 65];
+    println!("Max = {}", Max_num(&num_list));
     cli_tool::client::connect();
 }
